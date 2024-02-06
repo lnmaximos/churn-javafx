@@ -9,207 +9,157 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="650.0" style="-fx-border-width: 5px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tcc.project.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="710.0" style="-fx-border-width: 5px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tcc.project.Controller">
    <children>
-      <ImageView fitHeight="65.0" fitWidth="84.0" layoutX="14.0" layoutY="13.0" preserveRatio="true">
+      <ImageView fitHeight="65.0" fitWidth="84.0" layoutX="212.0" layoutY="14.0" preserveRatio="true">
          <image>
             <Image url="@logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="90.0" layoutY="31.0" text="Software Preditivo">
+      <Label layoutX="288.0" layoutY="32.0" text="Software Preditivo">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <ImageView fitHeight="16.0" fitWidth="42.0" layoutX="303.0" layoutY="13.0" preserveRatio="true" style="-fx-cursor: hand;">
-         <image>
-            <Image url="@user.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="337.0" layoutY="13.0" preserveRatio="true" style="-fx-cursor: hand;">
-         <image>
-            <Image url="@settings.png" />
-         </image>
-      </ImageView>
-      <Pane layoutX="33.0" layoutY="90.0" prefHeight="141.0" prefWidth="584.0" style="-fx-border-style: 1; -fx-border-color: #01a2fd; -fx-border-width: 2; -fx-background-color: #FFF;">
+      <Pane layoutX="33.0" layoutY="90.0" prefHeight="199.0" prefWidth="645.0" style="-fx-border-style: 1; -fx-border-color: #01a2fd; -fx-border-width: 2; -fx-background-color: #FFF;">
          <children>
-            <ImageView fitHeight="57.0" fitWidth="112.0" layoutX="-10.0" layoutY="-24.0" preserveRatio="true">
+            <ImageView fitHeight="57.0" fitWidth="136.0" layoutX="-16.0" layoutY="-17.0" nodeOrientation="RIGHT_TO_LEFT" style="-fx-rotate: 180;">
                <image>
                   <Image url="@blue-background.png" />
                </image>
             </ImageView>
-            <Label layoutX="13.0" layoutY="4.0" text="Formulário" textFill="WHITE">
+            <Label layoutX="17.0" layoutY="2.0" text="Formulário" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
             </Label>
-            <Label layoutX="99.0" layoutY="6.0" text="Preencha com os dados do cliente">
+            <Label layoutX="104.0" layoutY="7.0" text="Preencha com os dados do cliente">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="saldo" layoutX="14.0" layoutY="33.0" prefHeight="0.0" prefWidth="100.0" promptText="Saldo">
+            <TextField fx:id="saldo" layoutX="13.0" layoutY="60.0" prefHeight="0.0" prefWidth="110.0">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
-            <TextField fx:id="idade" layoutX="126.0" layoutY="33.0" prefHeight="0.0" prefWidth="100.0" promptText="Idade">
+            <TextField fx:id="idade" layoutX="138.0" layoutY="60.0" prefHeight="0.0" prefWidth="110.0">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
-            <TextField fx:id="salario" layoutX="242.0" layoutY="33.0" prefHeight="0.0" prefWidth="100.0" promptText="Salário">
+            <TextField fx:id="salario" layoutX="264.0" layoutY="60.0" prefHeight="0.0" prefWidth="110.0">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
-            <ComboBox fx:id="sexo" layoutX="357.0" layoutY="33.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="100.0" promptText="Sexo" />
-            <ComboBox fx:id="pais" layoutX="470.0" layoutY="33.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="100.0" promptText="País" />
-            <TextField fx:id="score" layoutX="14.0" layoutY="70.0" prefHeight="0.0" prefWidth="100.0" promptText="Score">
+            <ComboBox fx:id="sexo" layoutX="392.0" layoutY="59.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="110.0" promptText="Sexo" style="-fx-font-size: 12px;" />
+            <ComboBox fx:id="pais" layoutX="519.0" layoutY="60.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="110.0" promptText="País" style="-fx-font-size: 12px;" />
+            <TextField fx:id="score" layoutX="13.0" layoutY="116.0" prefHeight="0.0" prefWidth="110.0">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
-            <TextField fx:id="anosCliente" layoutX="126.0" layoutY="70.0" prefHeight="0.0" prefWidth="100.0" promptText="Anos de Cliente">
+            <TextField fx:id="anosCliente" layoutX="138.0" layoutY="116.0" prefHeight="0.0" prefWidth="110.0">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
-            <TextField fx:id="servicosAdquiridos" layoutX="242.0" layoutY="70.0" prefHeight="0.0" prefWidth="100.0" promptText="Serviços Adquiridos">
+            <TextField fx:id="servicosAdquiridos" layoutX="264.0" layoutY="115.0" prefHeight="0.0" prefWidth="110.0">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
-            <CheckBox fx:id="membroAtivo" layoutX="357.0" layoutY="74.0" mnemonicParsing="false" text="Membro Ativo?">
+            <CheckBox fx:id="membroAtivo" layoutX="396.0" layoutY="119.0" mnemonicParsing="false" text="Membro Ativo?">
                <font>
                   <Font size="11.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="temCartao" layoutX="478.0" layoutY="74.0" mnemonicParsing="false" text="Tem cartão?">
+            <CheckBox fx:id="temCartao" layoutX="532.0" layoutY="119.0" mnemonicParsing="false" text="Tem cartão?">
                <font>
                   <Font size="11.0" />
                </font>
             </CheckBox>
-            <Button fx:id="confirmarBtn" alignment="CENTER" layoutX="214.0" layoutY="104.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#confirmarBtn" prefHeight="23.0" prefWidth="69.0" style="-fx-background-color: #ebebeb; -fx-border-color: #01a2fd;" text="Confirmar" textAlignment="CENTER">
+            <Button fx:id="confirmarBtn" alignment="CENTER" layoutX="235.0" layoutY="162.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#confirmarBtn" prefHeight="23.0" prefWidth="76.0" style="-fx-background-color: #ebebeb; -fx-border-color: #01a2fd;" text="Confirmar" textAlignment="CENTER">
                <font>
                   <Font size="11.0" />
                </font>
             </Button>
-            <Button fx:id="esvaziarBtn" alignment="CENTER" layoutX="301.0" layoutY="104.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#esvaziarBtn" prefHeight="23.0" prefWidth="109.0" style="-fx-background-color: #ebebeb; -fx-border-color: #01a2fd;" text="Esvaziar Campos" textAlignment="CENTER">
+            <Button fx:id="esvaziarBtn" alignment="CENTER" layoutX="331.0" layoutY="162.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#esvaziarBtn" prefHeight="23.0" prefWidth="116.0" style="-fx-background-color: #ebebeb; -fx-border-color: #01a2fd;" text="Esvaziar Campos" textAlignment="CENTER">
                <font>
                   <Font size="11.0" />
                </font>
             </Button>
-         </children>
-      </Pane>
-      <Circle fill="#1f93ff00" layoutX="226.0" layoutY="249.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
-      <Line endX="134.0" endY="-25.0" layoutX="183.0" layoutY="274.0" startX="51.0" startY="-25.0" />
-      <Circle fill="#1f93ff00" layoutX="325.0" layoutY="249.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
-      <Line endX="134.0" endY="-25.0" layoutX="283.0" layoutY="274.0" startX="51.0" startY="-25.0" />
-      <Circle fill="#1f93ff00" layoutX="425.0" layoutY="249.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="198.0" layoutY="258.0" text="Formulário">
-         <font>
-            <Font name="System Bold" size="10.0" />
-         </font>
-      </Label>
-      <Label layoutX="286.0" layoutY="258.0" text="Opções de filtro">
-         <font>
-            <Font name="System Bold" size="10.0" />
-         </font>
-      </Label>
-      <Label layoutX="381.0" layoutY="258.0" text="Exibição de dados">
-         <font>
-            <Font name="System Bold" size="10.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="48.0" fitWidth="136.0" layoutX="21.0" layoutY="263.0" nodeOrientation="RIGHT_TO_LEFT" style="-fx-rotate: 180;">
-         <image>
-            <Image url="@blue-background.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="43.0" layoutY="273.0" text="Opções de filtro" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="11.0" />
-         </font>
-      </Label>
-      <Pane layoutX="33.0" layoutY="290.0" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: #FFF; -fx-border-color: #01a2fd;">
-         <children>
-            <Label layoutX="16.0" layoutY="5.0" text="Selecione Filtro 1">
+            <Label layoutX="14.0" layoutY="43.0" text="Saldo">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font size="12.0" />
                </font>
             </Label>
-            <ImageView fitHeight="18.0" fitWidth="15.0" layoutX="120.0" layoutY="6.0" preserveRatio="true" style="-fx-cursor: hand;">
-               <image>
-                  <Image url="@seta.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane layoutX="179.0" layoutY="290.0" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: #FFF; -fx-border-color: #01a2fd;">
-         <children>
-            <Label layoutX="16.0" layoutY="5.0" text="Selecione Filtro 2">
+            <Label layoutX="138.0" layoutY="43.0" text="Idade">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font size="12.0" />
                </font>
             </Label>
-            <ImageView fitHeight="18.0" fitWidth="15.0" layoutX="120.0" layoutY="6.0" preserveRatio="true" style="-fx-cursor: hand;">
-               <image>
-                  <Image url="@seta.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane layoutX="325.0" layoutY="290.0" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: #FFF; -fx-border-color: #01a2fd;">
-         <children>
-            <Label layoutX="16.0" layoutY="5.0" text="Selecione Filtro 3">
+            <Label layoutX="267.0" layoutY="43.0" text="Salário">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font size="12.0" />
                </font>
             </Label>
-            <ImageView fitHeight="18.0" fitWidth="15.0" layoutX="120.0" layoutY="6.0" preserveRatio="true" style="-fx-cursor: hand;">
-               <image>
-                  <Image url="@seta.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Pane layoutX="471.0" layoutY="290.0" prefHeight="26.0" prefWidth="146.0" style="-fx-background-color: #FFF; -fx-border-color: #01a2fd;">
-         <children>
-            <Label layoutX="16.0" layoutY="5.0" text="Selecione Filtro 4">
+            <Label layoutX="14.0" layoutY="99.0" text="Score">
                <font>
-                  <Font name="System Bold" size="11.0" />
+                  <Font size="12.0" />
                </font>
             </Label>
-            <ImageView fitHeight="18.0" fitWidth="15.0" layoutX="120.0" layoutY="6.0" preserveRatio="true" style="-fx-cursor: hand;">
-               <image>
-                  <Image url="@seta.png" />
-               </image>
-            </ImageView>
+            <Label layoutX="137.0" layoutY="99.0" text="Anos de Cliente">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="264.0" layoutY="99.0" text="Serviços Adquiridos">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <Pane layoutX="33.0" layoutY="343.0" prefHeight="216.0" prefWidth="584.0" style="-fx-border-style: 1; -fx-border-color: #01a2fd; -fx-border-width: 2; -fx-background-color: #FFF;">
+      <Pane layoutX="33.0" layoutY="319.0" prefHeight="240.0" prefWidth="301.0" style="-fx-border-style: 1; -fx-border-color: #01a2fd; -fx-border-width: 2; -fx-background-color: #FFF;">
          <children>
-            <ImageView fitHeight="63.0" fitWidth="202.0" layoutX="-18.0" layoutY="-26.0">
+            <ImageView fitHeight="65.0" fitWidth="219.0" layoutX="-27.0" layoutY="-20.0" nodeOrientation="RIGHT_TO_LEFT" style="-fx-rotate: 180;">
                <image>
                   <Image url="@blue-background.png" />
                </image>
             </ImageView>
-            <Label layoutX="13.0" layoutY="6.0" text="Quadro de informações" textFill="WHITE">
+            <Label layoutX="11.0" layoutY="3.0" text="Quadro de informações" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
             </Label>
-            <ImageView fx:id="info" fitHeight="24.0" fitWidth="23.0" layoutX="281.0" layoutY="85.0" preserveRatio="true">
+            <ImageView fx:id="info" fitHeight="24.0" fitWidth="23.0" layoutX="139.0" layoutY="97.0" preserveRatio="true">
                <image>
                   <Image url="@info.png" />
                </image>
             </ImageView>
-            <Label fx:id="returnLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" layoutY="116.0" minWidth="-Infinity" prefHeight="18.0" prefWidth="401.0" text="As informações serão apresentadas aqui" textAlignment="CENTER" />
+            <Label fx:id="returnLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-50.0" layoutY="126.0" minWidth="-Infinity" prefHeight="18.0" prefWidth="401.0" text="As informações serão apresentadas aqui" textAlignment="CENTER">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
          </children></Pane>
+      <Pane layoutX="376.0" layoutY="319.0" prefHeight="240.0" prefWidth="301.0" style="-fx-border-style: 1; -fx-border-color: #01a2fd; -fx-border-width: 2; -fx-background-color: #FFF;">
+         <children>
+            <ImageView fitHeight="65.0" fitWidth="219.0" layoutX="-27.0" layoutY="-20.0" nodeOrientation="RIGHT_TO_LEFT" style="-fx-rotate: 180;">
+               <image>
+                  <Image url="@blue-background.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="11.0" layoutY="3.0" text="Quadro de informações" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

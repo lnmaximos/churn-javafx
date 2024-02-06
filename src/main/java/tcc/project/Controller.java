@@ -44,26 +44,33 @@ public class Controller {
     @FXML
     private javafx.scene.image.ImageView info;
 
+    // Função para inicializar o formulário
     public void initialize() {
-        ObservableList<String> paises = FXCollections.observableArrayList("Alemanha", "Espanha", "França");
-        ObservableList<String> sexos = FXCollections.observableArrayList("Homem", "Mulher");
+        // Criação das listas para os ComboBoxes
+        ObservableList<String> paises = FXCollections.observableArrayList("País", "Alemanha", "Espanha", "França");
+        ObservableList<String> sexos = FXCollections.observableArrayList("Sexo", "Homem", "Mulher");
         sexo.setItems(sexos);
         pais.setItems(paises);
+        sexo.getSelectionModel().selectFirst();
+        pais.getSelectionModel().selectFirst();
 
+        // Aplica a validação de número inteiro em tempo real para os campos do formulário
         applyValidateInteger(idade, anosCliente, saldo, servicosAdquiridos, score, salario);
         sexo.valueProperty().addListener((observable, oldValue, newValue) -> validateComboBox(sexo));
         pais.valueProperty().addListener((observable, oldValue, newValue) -> validateComboBox(pais));
     }
 
+    // Função para aplicar a validação de número inteiro em tempo real para os campos do formulário
     private void applyValidateInteger(TextField... textFields) {
         Arrays.asList(textFields).forEach(textField -> textField.setOnKeyReleased(event -> validateInteger(textField)));
     }
 
+    // Função para validar se o campo é um número inteiro. Aplica uma borda vermelha caso algum caractere não seja um dígito. No caso do campo "saldo", aceita o caractere "-" para números negativos
     private void validateInteger(TextField textField) {
         String text = textField.getText();
 
         if (!text.isEmpty()) {
-            if (!text.matches("\\d+")) {
+            if ((textField != saldo && !text.matches("\\d+")) || (textField == saldo && !text.matches("-?\\d*"))) {
                 textField.setStyle("-fx-border-color: red;");
             } else {
                 textField.setStyle("");
@@ -73,16 +80,20 @@ public class Controller {
         }
     }
 
+    // Como a função validateInputs() já verifica se as ComboBoxes estão selecionadas, esta função aqui apenas remove o efeito vermelho da borda, pois ao esvaziar os campos através do botão "Esvaziar Campos", a borda vermelha não era removida
     private void validateComboBox(ComboBox<String> comboBox) {
-        if (comboBox.getValue() != null) {
+        if (comboBox.getValue().matches("Alemanha") || comboBox.getValue().matches("Espanha") || comboBox.getValue().matches("França") || comboBox.getValue().matches("Homem") || comboBox.getValue().matches("Mulher")) {
             info.setEffect(null);
-            comboBox.setStyle("");
+            comboBox.setStyle("-fx-font-size: 12px;");
         }
     }
 
+    // Função para validar os campos do formulário. Caso algum não esteja corretamente preenchido, a função retorna false e a requisição não é efetuada. Aplica alguns efeitos visuais para indicar que a validação falhou
     public boolean validateInputs() {
+        // Inicializa a variável de validação
         boolean isValid = true;
 
+        // Idade deve ser um número inteiro entre 0 e 120
         if (idade.getText().isEmpty() || !idade.getText().matches("\\d+") || Integer.parseInt(idade.getText()) < 0 || Integer.parseInt(idade.getText()) > 120) {
             idade.setStyle("-fx-border-color: red;");
             isValid = false;
@@ -90,6 +101,7 @@ public class Controller {
             idade.setStyle("");
         }
 
+        // Anos de cliente deve ser um número inteiro entre 0 e 120
         if (anosCliente.getText().isEmpty() || !anosCliente.getText().matches("\\d+") || Integer.parseInt(anosCliente.getText()) < 0 || Integer.parseInt(anosCliente.getText()) > 120) {
             anosCliente.setStyle("-fx-border-color: red;");
             isValid = false;
@@ -97,13 +109,15 @@ public class Controller {
             anosCliente.setStyle("");
         }
 
-        if (saldo.getText().isEmpty() || !saldo.getText().matches("\\d+")) {
+        // Saldo deve ser um número inteiro, positivo ou negativo
+        if (saldo.getText().isEmpty() || !saldo.getText().matches("-?\\d*")) {
             saldo.setStyle("-fx-border-color: red;");
             isValid = false;
         } else {
             saldo.setStyle("");
         }
 
+        // Serviços adquiridos deve ser um número inteiro positivo
         if (servicosAdquiridos.getText().isEmpty() || !servicosAdquiridos.getText().matches("\\d+") || Integer.parseInt(servicosAdquiridos.getText()) < 0) {
             servicosAdquiridos.setStyle("-fx-border-color: red;");
             isValid = false;
@@ -111,6 +125,7 @@ public class Controller {
             servicosAdquiridos.setStyle("");
         }
 
+        // Score de crédito deve ser um número inteiro entre 0 e 1000
         if (score.getText().isEmpty() || !score.getText().matches("\\d+") || Integer.parseInt(score.getText()) < 0 || Integer.parseInt(score.getText()) > 1000) {
             score.setStyle("-fx-border-color: red;");
             isValid = false;
@@ -118,6 +133,7 @@ public class Controller {
             score.setStyle("");
         }
 
+        // Salário estimado deve ser um número inteiro positivo
         if (salario.getText().isEmpty() || !salario.getText().matches("\\d+") || Integer.parseInt(salario.getText()) < 0) {
             salario.setStyle("-fx-border-color: red;");
             isValid = false;
@@ -125,35 +141,42 @@ public class Controller {
             salario.setStyle("");
         }
 
-        if (sexo.getValue() == null) {
-            sexo.setStyle("-fx-border-color: red;");
+        // Verifica se o sexo foi selecionado
+        if (sexo.getValue().matches("Sexo")) {
+            sexo.setStyle("-fx-border-color: red; -fx-font-size: 12px;");
             isValid = false;
         } else {
-            sexo.setStyle("");
+            sexo.setStyle("-fx-font-size: 12px;");
         }
 
-        if (pais.getValue() == null) {
-            pais.setStyle("-fx-border-color: red;");
+        // Verifica se o país foi selecionado
+        if (pais.getValue().matches("País")) {
+            pais.setStyle("-fx-border-color: red; -fx-font-size: 12px;");
             isValid = false;
         } else {
-            pais.setStyle("");
+            pais.setStyle("-fx-font-size: 12px;");
         }
 
+        // Caso a validação falhe, a label de retorno é atualizada com uma mensagem de erro e a imagem de informação recebe um efeito de cor vermelha
         if (!isValid) {
             info.setEffect(new ColorAdjust(1, 0, 0, 1));
             returnLabel.setText("Preencha os campos corretamente");
         }
 
+        // Retorna se a validação foi bem sucedida. Caso sim, a função retorna true e a requisição é efetuada
         return isValid;
     }
 
     public void confirmarBtn() throws IOException {
+        // Realiza uma validação nos campos. Caso a validação falhe, a função é encerrada aqui mesmo
         if (!validateInputs()) {
             return;
         }
 
+        // Cria um mapa com os dados do formulário
         Map<String, List<Object>> data = new HashMap<>();
 
+        // Adiciona os dados ao mapa
         data.put("score_credito", Arrays.asList(score.getText()));
         data.put("pais", Arrays.asList(pais.getValue()));
         data.put("sexo_biologico", Arrays.asList(sexo.getValue()));
@@ -197,11 +220,13 @@ public class Controller {
         InputStream inputStream = connection.getInputStream();
         String responsePython = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
 
+        // Imprime a resposta do Python na returnLabel e remove o efeito da imagem de informação para o caso de estar com cor vermelha
         info.setEffect(null);
         returnLabel.setText(responsePython);
     }
 
     public void esvaziarBtn() {
+        // Reseta todos os campos
         idade.clear();
         anosCliente.clear();
         saldo.clear();
@@ -210,19 +235,21 @@ public class Controller {
         salario.clear();
         temCartao.setSelected(false);
         membroAtivo.setSelected(false);
-        sexo.getSelectionModel().clearSelection();
-        pais.getSelectionModel().clearSelection();
+        sexo.getSelectionModel().selectFirst();
+        pais.getSelectionModel().selectFirst();
 
+        // Reseta a label de retorno e a imagem de informação
         info.setEffect(null);
         returnLabel.setText("As informações serão apresentadas aqui");
 
+        // Caso haja alguma borda vermelha, ela será removida
         idade.setStyle("");
         anosCliente.setStyle("");
         saldo.setStyle("");
         servicosAdquiridos.setStyle("");
         score.setStyle("");
         salario.setStyle("");
-        pais.setStyle("");
-        sexo.setStyle("");
+        pais.setStyle("-fx-font-size: 12px;");
+        sexo.setStyle("-fx-font-size: 12px;");
     }
 }
