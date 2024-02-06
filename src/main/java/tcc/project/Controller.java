@@ -222,5 +222,7 @@ public class Controller {
         servicosAdquiridos.setStyle("");
         score.setStyle("");
         salario.setStyle("");
+        pais.setStyle("");
+        sexo.setStyle("");
     }
 }
