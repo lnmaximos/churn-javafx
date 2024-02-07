@@ -7,7 +7,7 @@
     <groupId>tcc</groupId>
     <artifactId>churn-javafx</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>project2</name>
+    <name>project</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
