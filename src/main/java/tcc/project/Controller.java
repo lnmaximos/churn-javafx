@@ -7,6 +7,8 @@ import javafx.scene.control.ComboBox;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.text.Font;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -40,9 +42,13 @@ public class Controller {
     @FXML
     private javafx.scene.control.CheckBox membroAtivo;
     @FXML
-    private javafx.scene.control.Label returnLabel;
+    private javafx.scene.control.Label metricasLabel;
     @FXML
-    private javafx.scene.image.ImageView info;
+    private javafx.scene.control.Label predicaoLabel;
+    @FXML
+    private javafx.scene.control.Label logo_name;
+    @FXML
+    private javafx.scene.image.ImageView close;
 
     // Função para inicializar o formulário
     public void initialize() {
@@ -58,6 +64,13 @@ public class Controller {
         applyValidateInteger(idade, anosCliente, saldo, servicosAdquiridos, score, salario);
         sexo.valueProperty().addListener((observable, oldValue, newValue) -> validateComboBox(sexo));
         pais.valueProperty().addListener((observable, oldValue, newValue) -> validateComboBox(pais));
+
+        // Carrega a fonte personalizada para o logo
+        Font conthrax = Font.loadFont(getClass().getResourceAsStream("/tcc/project/conthrax-sb.ttf"), 28);
+        logo_name.setFont(conthrax);
+
+        // Fecha a aplicação ao clicar no botão de fechar
+        close.setOnMouseClicked(event -> System.exit(0));
     }
 
     // Função para aplicar a validação de número inteiro em tempo real para os campos do formulário
@@ -83,7 +96,6 @@ public class Controller {
     // Como a função validateInputs() já verifica se as ComboBoxes estão selecionadas, esta função aqui apenas remove o efeito vermelho da borda, pois ao esvaziar os campos através do botão "Esvaziar Campos", a borda vermelha não era removida
     private void validateComboBox(ComboBox<String> comboBox) {
         if (comboBox.getValue().matches("Alemanha") || comboBox.getValue().matches("Espanha") || comboBox.getValue().matches("França") || comboBox.getValue().matches("Homem") || comboBox.getValue().matches("Mulher")) {
-            info.setEffect(null);
             comboBox.setStyle("-fx-font-size: 12px;");
         }
     }
@@ -93,16 +105,16 @@ public class Controller {
         // Inicializa a variável de validação
         boolean isValid = true;
 
-        // Idade deve ser um número inteiro entre 0 e 120
-        if (idade.getText().isEmpty() || !idade.getText().matches("\\d+") || Integer.parseInt(idade.getText()) < 0 || Integer.parseInt(idade.getText()) > 120) {
+        // Idade deve ser um número inteiro entre 16 e 120
+        if (idade.getText().isEmpty() || !idade.getText().matches("\\d+") || Integer.parseInt(idade.getText()) < 16 || Integer.parseInt(idade.getText()) > 120) {
             idade.setStyle("-fx-border-color: red;");
             isValid = false;
         } else {
             idade.setStyle("");
         }
 
-        // Anos de cliente deve ser um número inteiro entre 0 e 120
-        if (anosCliente.getText().isEmpty() || !anosCliente.getText().matches("\\d+") || Integer.parseInt(anosCliente.getText()) < 0 || Integer.parseInt(anosCliente.getText()) > 120) {
+        // Anos de cliente deve ser um número inteiro entre 0 e 100
+        if (anosCliente.getText().isEmpty() || !anosCliente.getText().matches("\\d+") || Integer.parseInt(anosCliente.getText()) < 0 || Integer.parseInt(anosCliente.getText()) > 100) {
             anosCliente.setStyle("-fx-border-color: red;");
             isValid = false;
         } else {
@@ -157,12 +169,6 @@ public class Controller {
             pais.setStyle("-fx-font-size: 12px;");
         }
 
-        // Caso a validação falhe, a label de retorno é atualizada com uma mensagem de erro e a imagem de informação recebe um efeito de cor vermelha
-        if (!isValid) {
-            info.setEffect(new ColorAdjust(1, 0, 0, 1));
-            returnLabel.setText("Preencha os campos corretamente");
-        }
-
         // Retorna se a validação foi bem sucedida. Caso sim, a função retorna true e a requisição é efetuada
         return isValid;
     }
@@ -192,7 +198,7 @@ public class Controller {
         String requestBody = new ObjectMapper().writeValueAsString(data);
 
         // URL para o endpoint /predict
-        URL url = new URL("http://localhost:5000/predict");
+        URL url = new URL("https://previtech-a544a1393ecd.herokuapp.com/predict");
 
         // Criação da conexão HTTP
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -216,13 +222,18 @@ public class Controller {
         int responseCode = connection.getResponseCode();
         System.out.println("Código de resposta: " + responseCode);
 
-        // Lê a resposta do Python
+        // Lendo a resposta do servidor
         InputStream inputStream = connection.getInputStream();
         String responsePython = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
 
-        // Imprime a resposta do Python na returnLabel e remove o efeito da imagem de informação para o caso de estar com cor vermelha
-        info.setEffect(null);
-        returnLabel.setText(responsePython);
+        Map<String,Object> result = new ObjectMapper().readValue(responsePython, HashMap.class);
+        String acuracia = String.valueOf(result.get("acuracia"));
+        String precisao = String.valueOf(result.get("precisao"));
+        String recall = String.valueOf(result.get("recall"));
+        String predicao = String.valueOf(result.get("predicao"));
+
+        metricasLabel.setText(" Acurácia: " + acuracia + "%" + "\n" + " Precisão:  " + precisao + "%" + "\n" + " Recall:      " + recall + "%");
+        predicaoLabel.setText(predicao);
     }
 
     public void esvaziarBtn() {
@@ -237,10 +248,6 @@ public class Controller {
         membroAtivo.setSelected(false);
         sexo.getSelectionModel().selectFirst();
         pais.getSelectionModel().selectFirst();
-
-        // Reseta a label de retorno e a imagem de informação
-        info.setEffect(null);
-        returnLabel.setText("As informações serão apresentadas aqui");
 
         // Caso haja alguma borda vermelha, ela será removida
         idade.setStyle("");
