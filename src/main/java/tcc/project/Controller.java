@@ -232,7 +232,7 @@ public class Controller {
         String recall = String.valueOf(result.get("recall"));
         String predicao = String.valueOf(result.get("predicao"));
 
-        metricasLabel.setText(" Acurácia: " + acuracia + "%" + "\n" + " Precisão:  " + precisao + "%" + "\n" + " Recall:      " + recall + "%");
+        metricasLabel.setText(" Acurácia:  " + acuracia + "%" + "\n" + " Precisão:  " + precisao + "%" + "\n" + " Recall:       " + recall + "%");
         predicaoLabel.setText(predicao);
     }
 
