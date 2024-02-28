@@ -49,6 +49,8 @@ public class Controller {
     private javafx.scene.control.Label logo_name;
     @FXML
     private javafx.scene.image.ImageView close;
+    @FXML
+    private javafx.scene.control.Label errorLabel;
 
     // Função para inicializar o formulário
     public void initialize() {
@@ -87,9 +89,11 @@ public class Controller {
                 textField.setStyle("-fx-border-color: red;");
             } else {
                 textField.setStyle("");
+                errorLabel.setText("");
             }
         } else {
             textField.setStyle("");
+            errorLabel.setText("");
         }
     }
 
@@ -105,42 +109,30 @@ public class Controller {
         // Inicializa a variável de validação
         boolean isValid = true;
 
-        // Idade deve ser um número inteiro entre 16 e 120
-        if (idade.getText().isEmpty() || !idade.getText().matches("\\d+") || Integer.parseInt(idade.getText()) < 16 || Integer.parseInt(idade.getText()) > 120) {
-            idade.setStyle("-fx-border-color: red;");
-            isValid = false;
-        } else {
-            idade.setStyle("");
-        }
-
-        // Anos de cliente deve ser um número inteiro entre 0 e 100
-        if (anosCliente.getText().isEmpty() || !anosCliente.getText().matches("\\d+") || Integer.parseInt(anosCliente.getText()) < 0 || Integer.parseInt(anosCliente.getText()) > 100) {
-            anosCliente.setStyle("-fx-border-color: red;");
-            isValid = false;
-        } else {
-            anosCliente.setStyle("");
-        }
-
-        // Saldo deve ser um número inteiro, positivo ou negativo
-        if (saldo.getText().isEmpty() || !saldo.getText().matches("-?\\d*")) {
-            saldo.setStyle("-fx-border-color: red;");
-            isValid = false;
-        } else {
-            saldo.setStyle("");
-        }
-
         // Serviços adquiridos deve ser um número inteiro positivo
         if (servicosAdquiridos.getText().isEmpty() || !servicosAdquiridos.getText().matches("\\d+") || Integer.parseInt(servicosAdquiridos.getText()) < 0) {
             servicosAdquiridos.setStyle("-fx-border-color: red;");
             isValid = false;
+            errorLabel.setText("Serviços adquiridos deve ser um número inteiro positivo");
         } else {
             servicosAdquiridos.setStyle("");
+        }
+
+        // Anos de cliente deve ser um número inteiro entre 0 e 100, e 16 anos a menos que a idade
+        if (anosCliente.getText().isEmpty() || !anosCliente.getText().matches("\\d+") || Integer.parseInt(anosCliente.getText()) < 0 || Integer.parseInt(anosCliente.getText()) > 100 || (Integer.parseInt(anosCliente.getText()) > (Integer.parseInt(idade.getText()) - 16))
+        ) {
+            anosCliente.setStyle("-fx-border-color: red;");
+            isValid = false;
+            errorLabel.setText("Anos de cliente deve ser um número inteiro entre 0 e 100, e 16 anos a menos que a idade");
+        } else {
+            anosCliente.setStyle("");
         }
 
         // Score de crédito deve ser um número inteiro entre 0 e 1000
         if (score.getText().isEmpty() || !score.getText().matches("\\d+") || Integer.parseInt(score.getText()) < 0 || Integer.parseInt(score.getText()) > 1000) {
             score.setStyle("-fx-border-color: red;");
             isValid = false;
+            errorLabel.setText("Score de crédito deve ser um número inteiro entre 0 e 1000");
         } else {
             score.setStyle("");
         }
@@ -149,8 +141,27 @@ public class Controller {
         if (salario.getText().isEmpty() || !salario.getText().matches("\\d+") || Integer.parseInt(salario.getText()) < 0) {
             salario.setStyle("-fx-border-color: red;");
             isValid = false;
+            errorLabel.setText("Salário estimado deve ser um número inteiro positivo");
         } else {
             salario.setStyle("");
+        }
+
+        // Idade deve ser um número inteiro entre 16 e 120
+        if (idade.getText().isEmpty() || !idade.getText().matches("\\d+") || Integer.parseInt(idade.getText()) < 16 || Integer.parseInt(idade.getText()) > 120) {
+            idade.setStyle("-fx-border-color: red;");
+            isValid = false;
+            errorLabel.setText("Idade deve ser um número inteiro entre 16 e 120");
+        } else {
+            idade.setStyle("");
+        }
+
+        // Saldo deve ser um número inteiro, positivo ou negativo
+        if (saldo.getText().isEmpty() || !saldo.getText().matches("-?\\d*")) {
+            saldo.setStyle("-fx-border-color: red;");
+            isValid = false;
+            errorLabel.setText("Saldo deve ser um número inteiro, positivo ou negativo");
+        } else {
+            saldo.setStyle("");
         }
 
         // Verifica se o sexo foi selecionado
@@ -258,5 +269,7 @@ public class Controller {
         salario.setStyle("");
         pais.setStyle("-fx-font-size: 12px;");
         sexo.setStyle("-fx-font-size: 12px;");
+
+        errorLabel.setText("");
     }
 }

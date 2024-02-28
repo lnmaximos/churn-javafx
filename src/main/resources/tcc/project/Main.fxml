@@ -126,6 +126,11 @@
                   </Label>
                </children>
             </Pane>
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="142.0" prefHeight="18.0" prefWidth="639.0" textFill="RED">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane layoutX="33.0" layoutY="319.0" prefHeight="240.0" prefWidth="301.0" style="-fx-border-style: 1; -fx-border-color: #000; -fx-border-width: 2; -fx-background-color: #fff;">
